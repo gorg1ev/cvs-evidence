@@ -1,0 +1,48 @@
+{
+  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
+  "appId": "190525",
+  "asar": false,
+  "publish": null,
+  "productName": "cvs-evidence",
+  "directories": {
+    "output": "release/${version}"
+  },
+  "files": ["dist", "dist-electron"],
+  "extraResources": [
+    {
+      "from": "data/",
+      "to": "data/",
+      "filter": ["**/*"]
+    },
+    {
+      "from": "drizzle/",
+      "to": "drizzle/",
+      "filter": ["**/*"]
+    }
+  ],
+  "mac": {
+    "target": ["dmg"],
+    "artifactName": "${productName}-Mac-${version}-Installer.${ext}",
+    "icon": "public/icon.icns"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ],
+    "artifactName": "${productName}-Windows-${version}-Setup.${ext}",
+    "icon": "public/icon.ico"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowToChangeInstallationDirectory": true,
+    "deleteAppDataOnUninstall": false
+  },
+  "linux": {
+    "target": ["AppImage"],
+    "artifactName": "${productName}-Linux-${version}.${ext}"
+  }
+}
