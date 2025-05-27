@@ -19,6 +19,7 @@ import { useEmployeeStore } from "@/store/employeeStore";
 import { useSickLeaveStore } from "@/store/sickLeaveStore";
 import { useDialogStore } from "@/store/dialogStore";
 import { toast } from "react-toastify";
+import { enGB } from "date-fns/locale";
 
 export default function SickLeaveFormTab() {
   const { selectedEmployee } = useEmployeeStore();
@@ -85,6 +86,7 @@ export default function SickLeaveFormTab() {
                   <FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
@@ -128,6 +130,7 @@ export default function SickLeaveFormTab() {
                     </FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}

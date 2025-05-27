@@ -19,6 +19,7 @@ import { useEmployeeStore } from "@/store/employeeStore";
 import { useVacationStore } from "@/store/vacationStore";
 import { toast } from "react-toastify";
 import { useDialogStore } from "@/store/dialogStore";
+import { enGB } from "date-fns/locale";
 
 export default function VacationFormTab() {
   const { selectedEmployee } = useEmployeeStore();
@@ -85,6 +86,7 @@ export default function VacationFormTab() {
                   <FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
@@ -129,6 +131,7 @@ export default function VacationFormTab() {
                     </FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}

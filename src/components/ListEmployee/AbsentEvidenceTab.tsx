@@ -26,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { format } from "date-fns";
+import { enGB } from "date-fns/locale";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
 
@@ -132,6 +133,7 @@ export default function AbsentEvidenceTab() {
                     </FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
@@ -170,6 +172,7 @@ export default function AbsentEvidenceTab() {
                       </FormControl>
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
+                          locale={enGB}
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}

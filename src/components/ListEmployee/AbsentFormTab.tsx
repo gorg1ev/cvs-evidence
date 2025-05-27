@@ -20,6 +20,7 @@ import { useEmployeeStore } from "@/store/employeeStore";
 import { useAbsentStore } from "@/store/absentStore";
 import { useDialogStore } from "@/store/dialogStore";
 import { toast } from "react-toastify";
+import { enGB } from "date-fns/locale";
 
 export default function AbsentFormTab() {
   const { selectedEmployee } = useEmployeeStore();
@@ -104,6 +105,7 @@ export default function AbsentFormTab() {
                   </FormControl>
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
+                      locale={enGB}
                       mode="single"
                       selected={field.value}
                       onSelect={field.onChange}

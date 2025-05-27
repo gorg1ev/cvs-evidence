@@ -27,6 +27,7 @@ import { differenceInDays, format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
 import { useSickLeaveStore } from "@/store/sickLeaveStore";
+import { enGB } from "date-fns/locale";
 
 export default function SickLeaveEvidenceTab() {
   const { selectedEmployee } = useEmployeeStore();
@@ -137,6 +138,7 @@ export default function SickLeaveEvidenceTab() {
                     </FormControl>
                     <PopoverContent className="w-auto p-0" align="start">
                       <Calendar
+                        locale={enGB}
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
@@ -175,6 +177,7 @@ export default function SickLeaveEvidenceTab() {
                       </FormControl>
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
+                        locale={enGB}
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
