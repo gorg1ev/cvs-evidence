@@ -9,6 +9,7 @@ export const absent = sqliteTable("absent", {
   timeFrom: integer().notNull(),
   timeTo: integer().notNull(),
   note: text(),
+  total: integer().default(0),
 });
 
 export const sickLeave = sqliteTable("sickLeave", {
@@ -19,6 +20,7 @@ export const sickLeave = sqliteTable("sickLeave", {
   dateFrom: text().notNull(),
   dateTo: text().notNull(),
   note: text(),
+  total: integer().default(0),
 });
 
 export const vacation = sqliteTable("vacation", {
@@ -29,6 +31,7 @@ export const vacation = sqliteTable("vacation", {
   dateFrom: text().notNull(),
   dateTo: text().notNull(),
   note: text(),
+  total: integer().default(0),
 });
 
 export const employees = sqliteTable("employees", {

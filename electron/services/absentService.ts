@@ -17,7 +17,8 @@ export async function saveAbsentService(
   _e: IpcMainInvokeEvent,
   absent: Absent
 ) {
-  await saveAbsent(absent);
+  const total = absent.timeTo - absent.timeFrom;
+  await saveAbsent({ ...absent, total });
 }
 
 export async function countAbsentsByEmployeeIdService(
