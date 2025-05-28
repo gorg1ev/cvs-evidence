@@ -37,4 +37,8 @@ contextBridge.exposeInMainWorld("ipcRenderer", {
   countVacationsByEmployeeId: (employeeId: number) =>
     ipcRenderer.invoke("countVacationsByEmployeeId", employeeId),
   deleteVacation: (id: number) => ipcRenderer.invoke("deleteVacation", id),
+
+  importHolidays: () => ipcRenderer.invoke("importHolidays"),
+
+  getHolidays: () => ipcRenderer.invoke("getHolidays"),
 });

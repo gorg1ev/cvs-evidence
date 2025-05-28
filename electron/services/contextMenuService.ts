@@ -1,7 +1,7 @@
 import { BrowserWindow, dialog } from "electron";
 import path from "node:path";
 import fs from "node:fs";
-import { dbFilePath } from "../utils";
+import { APP_ROOT, dbFilePath } from "../utils";
 
 export async function importDB(mainWindow: BrowserWindow) {
   const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
@@ -13,7 +13,7 @@ export async function importDB(mainWindow: BrowserWindow) {
   if (!canceled && filePaths) {
     fs.copyFile(filePaths[0], dbFilePath(), (err) => {
       if (err) {
-        console.error("Failed to export DB:", err);
+        console.error("Failed to import DB:", err);
         return;
       }
       console.log("Database imported successfully.");
@@ -39,5 +39,29 @@ export async function exportDB(mainWindow: BrowserWindow) {
       console.log("db export successfully");
       BrowserWindow.getAllWindows()[0].webContents.send("db-exported");
     });
+  }
+}
+
+export async function importHolidays() {
+  const mainWindow = BrowserWindow.getAllWindows()[0];
+  const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+    title: "Select a Holidays JSON file",
+    filters: [{ name: "Json files", extensions: ["json"] }],
+    properties: ["openFile"],
+  });
+
+  if (!canceled && filePaths) {
+    fs.copyFile(
+      filePaths[0],
+      path.join(APP_ROOT, "data/holidays.json"),
+      (err) => {
+        if (err) {
+          console.error("Failed to import holidays:", err);
+          return;
+        }
+        console.log("Holidays imported successfully.");
+        mainWindow.webContents.send("holidays-imported");
+      }
+    );
   }
 }

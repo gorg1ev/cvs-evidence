@@ -23,6 +23,8 @@ import {
   getEmployeeVacationsService,
   saveVacationService,
 } from "./services/vacationService";
+import { importHolidays } from "./services/contextMenuService";
+import { getHolidaysService } from "./services/holidayService";
 
 export function registerIpcHandlers() {
   ipcMain.handle("getEmployees", getEmployeesService);
@@ -50,4 +52,8 @@ export function registerIpcHandlers() {
     countVacationsByEmployeeIdService
   );
   ipcMain.handle("deleteVacation", deleteVacationService);
+
+  ipcMain.handle("importHolidays", importHolidays);
+
+  ipcMain.handle("getHolidays", getHolidaysService);
 }

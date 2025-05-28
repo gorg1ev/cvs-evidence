@@ -31,5 +31,9 @@ interface Window {
     saveVacation: (vacation: Vacation) => Promise<void>;
     countVacationsByEmployeeId: (employeeId: number) => Promise<number>;
     deleteVacation: (id: number) => Promise<void>;
+
+    importHolidays: () => Promise<void>;
+
+    getHolidays: () => Promise<Holidays[]>;
   };
 }

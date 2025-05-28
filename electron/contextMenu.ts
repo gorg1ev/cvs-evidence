@@ -22,6 +22,14 @@ export function setupAppMenu(win: BrowserWindow | null) {
             }
           },
         },
+        {
+          label: "Holidays",
+          click: async () => {
+            if (win) {
+              win.webContents.send("open-holidays-dialog");
+            }
+          },
+        },
         { type: "separator" },
         { role: "quit" },
       ],

@@ -1,3 +1,4 @@
+import HolidaysDialog from "@/components/HolidaysDialog";
 import EmployeeDialogForm from "@/components/ListEmployee/EmployeeDialogForm";
 import ListEmployeeTable from "@/components/ListEmployee/ListEmployeeTable";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,11 @@ export default function MainPage() {
       <div>
         <header className="flex justify-between">
           <div>
-            <Input type="email" placeholder="Пребарувај по име" disabled={true} />
+            <Input
+              type="email"
+              placeholder="Пребарувај по име"
+              disabled={true}
+            />
           </div>
           <EmployeeDialogForm />
         </header>
@@ -21,6 +26,7 @@ export default function MainPage() {
           <ListEmployeeTable />
         </main>
       </div>
+      <HolidaysDialog />
     </>
   );
 }

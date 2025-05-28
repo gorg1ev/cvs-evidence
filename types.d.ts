@@ -47,3 +47,9 @@ type Vacation = {
   dateTo: string;
   note: string | null;
 };
+
+type Holidays = {
+  date: Date | string;
+  name: string;
+  day: string;
+};
