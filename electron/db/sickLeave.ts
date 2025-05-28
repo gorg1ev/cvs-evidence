@@ -26,6 +26,7 @@ export async function saveSickLeave(sl: SickLeave) {
     dateFrom: sl.dateFrom,
     dateTo: sl.dateTo,
     note: sl.note,
+    total: sl.total,
   });
 }
 

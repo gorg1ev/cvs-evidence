@@ -46,6 +46,7 @@ export default function VacationFormTab() {
       dateFrom: formatDate(values.dateFrom),
       dateTo: formatDate(values.dateTo),
       note: values.note,
+      total: null,
     } satisfies Vacation;
 
     saveVacation(vacaton);

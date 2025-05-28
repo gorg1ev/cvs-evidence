@@ -46,6 +46,7 @@ export default function SickLeaveFormTab() {
       dateFrom: formatDate(values.dateFrom),
       dateTo: formatDate(values.dateTo),
       note: values.note,
+      total: null,
     } satisfies SickLeave;
 
     saveSickLeave(sickLeave);

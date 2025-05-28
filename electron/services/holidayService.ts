@@ -1,3 +1,4 @@
+import { isWithinInterval, parseISO } from "date-fns";
 import { APP_ROOT } from "../utils";
 import fs from "node:fs";
 import path from "node:path";
@@ -13,4 +14,21 @@ export function getHolidaysService(): Holidays[] {
   const data = JSON.parse(json);
 
   return data as Holidays[];
+}
+
+export function countOverlappingHolidays(
+  start: Date | string,
+  end: Date | string
+) {
+  const startDate = parseISO(start.toString());
+  const endDate = parseISO(end.toString());
+
+  const holidays = getHolidaysService();
+
+  if (holidays.length === 0) return 0;
+
+  return holidays.filter((holiday) => {
+    const date = parseISO(holiday.date.toString());
+    return isWithinInterval(date, { start: startDate, end: endDate });
+  }).length;
 }

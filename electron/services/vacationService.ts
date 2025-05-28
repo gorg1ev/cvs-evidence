@@ -5,6 +5,8 @@ import {
   getEmployeeVacations,
   saveVacation,
 } from "../db/vacation";
+import { countOverlappingHolidays } from "./holidayService";
+import { addDays, differenceInBusinessDays } from "date-fns";
 
 export async function getEmployeeVacationsService(
   _e: IpcMainInvokeEvent,
@@ -17,7 +19,14 @@ export async function saveVacationService(
   _e: IpcMainInvokeEvent,
   vacation: Vacation
 ) {
-  await saveVacation(vacation);
+  const overlapping = countOverlappingHolidays(
+    vacation.dateFrom,
+    vacation.dateTo
+  );
+  const total =
+    differenceInBusinessDays(addDays(vacation.dateTo, 1), vacation.dateFrom) -
+    overlapping;
+  await saveVacation({ ...vacation, total });
 }
 
 export async function countVacationsByEmployeeIdService(

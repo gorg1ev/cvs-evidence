@@ -66,10 +66,7 @@ export default function AbsentEvidenceTab() {
   }
 
   function totalAbsent() {
-    const total = absents.reduce(
-      (sum, abs) => sum + abs.timeTo - abs.timeFrom,
-      0
-    );
+    const total = absents.reduce((sum, abs) => sum + (abs.total ?? 0), 0);
     return minutesToHoursExtended(total);
   }
 
@@ -227,7 +224,7 @@ export default function AbsentEvidenceTab() {
                     </TableCell>
                     <TableCell>{minutesToHoursExtended(abs.timeTo)}</TableCell>
                     <TableCell>
-                      {minutesToHoursExtended(abs.timeTo - abs.timeFrom)}
+                      {minutesToHoursExtended(abs?.total ?? 0)}
                     </TableCell>
                     <TableCell>
                       {abs.note ? (

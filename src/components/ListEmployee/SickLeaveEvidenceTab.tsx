@@ -23,7 +23,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { differenceInDays } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
 import { useSickLeaveStore } from "@/store/sickLeaveStore";
@@ -66,12 +65,7 @@ export default function SickLeaveEvidenceTab() {
   }
 
   function totalSickLeaves() {
-    return sickLeaves.reduce(
-      (sum, sl) =>
-        sum +
-        (differenceInDays(new Date(sl.dateTo), new Date(sl.dateFrom)) + 1),
-      0
-    );
+    return sickLeaves.reduce((sum, sl) => sum + (sl.total ?? 0), 0);
   }
 
   function onDeleteHandler(id: number | null) {
@@ -223,9 +217,7 @@ export default function SickLeaveEvidenceTab() {
                   <TableRow key={sl.id}>
                     <TableCell>{formatDateMKD(sl.dateFrom)}</TableCell>
                     <TableCell>{formatDateMKD(sl.dateTo)}</TableCell>
-                    <TableCell className="text-center">
-                      {differenceInDays(sl.dateTo, sl.dateFrom) + 1}
-                    </TableCell>
+                    <TableCell className="text-center">{sl.total}</TableCell>
                     <TableCell>
                       {sl.note ? (
                         <TooltipProvider>

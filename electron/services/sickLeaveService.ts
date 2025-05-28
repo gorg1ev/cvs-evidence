@@ -5,6 +5,7 @@ import {
   getEmployeeSickLeaves,
   saveSickLeave,
 } from "../db/sickLeave";
+import { addDays, differenceInDays } from "date-fns";
 
 export async function getEmployeeSickLeavesService(
   _e: IpcMainInvokeEvent,
@@ -17,7 +18,11 @@ export async function saveSickLeaveService(
   _e: IpcMainInvokeEvent,
   sickLeave: SickLeave
 ) {
-  await saveSickLeave(sickLeave);
+  const total = differenceInDays(
+    addDays(sickLeave.dateTo, 1),
+    sickLeave.dateFrom
+  );
+  await saveSickLeave({ ...sickLeave, total });
 }
 
 export async function countSickLeavesByEmployeeIdService(

@@ -23,7 +23,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { differenceInDays } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
 import { useVacationStore } from "@/store/vacationStore";
@@ -66,11 +65,7 @@ export default function VacationEvidenceTab() {
   }
 
   function totalVacation() {
-    return vacations.reduce(
-      (sum, v) =>
-        sum + (differenceInDays(new Date(v.dateTo), new Date(v.dateFrom)) + 1),
-      0
-    );
+    return vacations.reduce((sum, v) => sum + (v.total ?? 0), 0);
   }
 
   function onDeleteHandler(id: number | null) {
@@ -222,9 +217,7 @@ export default function VacationEvidenceTab() {
                   <TableRow key={v.id}>
                     <TableCell>{formatDateMKD(v.dateFrom)}</TableCell>
                     <TableCell>{formatDateMKD(v.dateTo)}</TableCell>
-                    <TableCell className="text-center">
-                      {differenceInDays(v.dateTo, v.dateFrom) + 1}
-                    </TableCell>
+                    <TableCell className="text-center">{v.total}</TableCell>
                     <TableCell>
                       {v.note ? (
                         <TooltipProvider>

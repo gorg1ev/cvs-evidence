@@ -28,6 +28,7 @@ export async function saveAbsent(a: Absent) {
     timeFrom: a.timeFrom,
     timeTo: a.timeTo,
     note: a.note,
+    total: a.total,
   });
 }
 

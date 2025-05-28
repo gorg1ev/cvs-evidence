@@ -12,6 +12,7 @@ type Absent = {
   timeFrom: number;
   timeTo: number;
   note: string | null;
+  total: number | null;
 };
 
 type AbsentFilter = {
@@ -38,6 +39,7 @@ type SickLeave = {
   dateFrom: string;
   dateTo: string;
   note: string | null;
+  total: number | null;
 };
 
 type Vacation = {
@@ -46,6 +48,7 @@ type Vacation = {
   dateFrom: string;
   dateTo: string;
   note: string | null;
+  total: number | null;
 };
 
 type Holidays = {

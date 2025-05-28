@@ -64,6 +64,7 @@ export default function AbsentFormTab() {
       timeFrom: hourFrom * 60 + minFrom,
       timeTo: hourTo * 60 + minTo,
       note: values.note,
+      total: null
     } satisfies Absent;
     console.log(absent);
 

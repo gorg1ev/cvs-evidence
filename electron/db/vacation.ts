@@ -20,11 +20,13 @@ export async function getEmployeeVacations({
     .orderBy(desc(vacation.dateFrom));
 }
 export async function saveVacation(v: Vacation) {
+  console.log(v.total);
   await db.insert(vacation).values({
     employeeId: v.employeeId,
     dateFrom: v.dateFrom,
     dateTo: v.dateTo,
     note: v.note,
+    total: v.total,
   });
 }
 
