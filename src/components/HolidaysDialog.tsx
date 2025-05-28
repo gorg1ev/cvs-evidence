@@ -12,17 +12,24 @@ import {
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { formatDateMKD } from "@/lib/utils";
+import { toast } from "react-toastify";
 
 export default function HolidaysDialog() {
   const [open, setOpen] = useState(false);
   const [holidays, setHolidays] = useState<Holidays[]>([]);
 
+  function getHolidays() {
+    window.ipcRenderer.getHolidays().then((holidays) => setHolidays(holidays));
+  }
+
   useEffect(() => {
     window.ipcRenderer.on("open-holidays-dialog", () => {
-      window.ipcRenderer
-        .getHolidays()
-        .then((holidays) => setHolidays(holidays));
+      getHolidays();
       setOpen(true);
+    });
+    window.ipcRenderer.on("holidays-imported", () => {
+      getHolidays();
+      toast.success("Успешно е додадена датотеката со неработни денови.")
     });
   }, []);
 
@@ -54,7 +61,9 @@ export default function HolidaysDialog() {
             <TableBody>
               {holidays.map((h) => (
                 <TableRow key={h.date.toString()}>
-                  <TableCell className="font-bold">{formatDateMKD(h.date)}</TableCell>
+                  <TableCell className="font-bold">
+                    {formatDateMKD(h.date)}
+                  </TableCell>
                   <TableCell>{h.day}</TableCell>
                   <TableCell>{h.name}</TableCell>
                 </TableRow>
