@@ -1,7 +1,6 @@
-import { cn } from "@/lib/utils";
+import { cn, formatDate, formatDateMKD } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { format } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import { CalendarIcon } from "lucide-react";
 import { Textarea } from "../ui/textarea";
@@ -44,8 +43,8 @@ export default function SickLeaveFormTab() {
     const sickLeave = {
       id: null,
       employeeId: selectedEmployee?.id,
-      dateFrom: format(values.dateFrom, "yyyy-MM-dd"),
-      dateTo: format(values.dateTo, "yyyy-MM-dd"),
+      dateFrom: formatDate(values.dateFrom),
+      dateTo: formatDate(values.dateTo),
       note: values.note,
     } satisfies SickLeave;
 
@@ -76,7 +75,7 @@ export default function SickLeaveFormTab() {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "PPP")
+                        formatDateMKD(field.value)
                       ) : (
                         <span>Избери датум од</span>
                       )}
@@ -120,7 +119,7 @@ export default function SickLeaveFormTab() {
                           disabled={isDisabled}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            formatDateMKD(field.value)
                           ) : (
                             <span>Избери датум до</span>
                           )}

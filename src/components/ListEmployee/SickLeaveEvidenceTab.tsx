@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { cn } from "@/lib/utils";
+import { cn, formatDate, formatDateMKD } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { CalendarIcon, Trash } from "lucide-react";
 import {
@@ -23,7 +23,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { differenceInDays, format } from "date-fns";
+import { differenceInDays } from "date-fns";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
 import { useSickLeaveStore } from "@/store/sickLeaveStore";
@@ -52,8 +52,8 @@ export default function SickLeaveEvidenceTab() {
 
     getSickLeaves({
       employeeId: selectedEmployee?.id,
-      startDate: values.startDate && format(values.startDate, "yyyy-MM-dd"),
-      endDate: values.endDate && format(values.endDate, "yyyy-MM-dd"),
+      startDate: values.startDate && formatDate(values.startDate),
+      endDate: values.endDate && formatDate(values.endDate),
     } as SickLeaveFilter);
   }
 
@@ -128,7 +128,7 @@ export default function SickLeaveEvidenceTab() {
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            formatDateMKD(field.value)
                           ) : (
                             <span>Избери датум од</span>
                           )}
@@ -167,7 +167,7 @@ export default function SickLeaveEvidenceTab() {
                             )}
                           >
                             {field.value ? (
-                              format(field.value, "PPP")
+                              formatDateMKD(field.value)
                             ) : (
                               <span>Избери датум до</span>
                             )}
@@ -177,7 +177,7 @@ export default function SickLeaveEvidenceTab() {
                       </FormControl>
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
-                        locale={enGB}
+                          locale={enGB}
                           mode="single"
                           selected={field.value}
                           onSelect={field.onChange}
@@ -221,8 +221,8 @@ export default function SickLeaveEvidenceTab() {
               <TableBody>
                 {sickLeaves.map((sl) => (
                   <TableRow key={sl.id}>
-                    <TableCell>{sl.dateFrom}</TableCell>
-                    <TableCell>{sl.dateTo}</TableCell>
+                    <TableCell>{formatDateMKD(sl.dateFrom)}</TableCell>
+                    <TableCell>{formatDateMKD(sl.dateTo)}</TableCell>
                     <TableCell className="text-center">
                       {differenceInDays(sl.dateTo, sl.dateFrom) + 1}
                     </TableCell>

@@ -10,7 +10,12 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { cn, minutesToHoursExtended } from "@/lib/utils";
+import {
+  cn,
+  formatDate,
+  formatDateMKD,
+  minutesToHoursExtended,
+} from "@/lib/utils";
 import { Button } from "../ui/button";
 import { CalendarIcon, Trash } from "lucide-react";
 import {
@@ -25,7 +30,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { format } from "date-fns";
 import { enGB } from "date-fns/locale";
 import { Calendar } from "../ui/calendar";
 import EvidenceAlert from "./EvidenceAlert";
@@ -48,8 +52,8 @@ export default function AbsentEvidenceTab() {
 
     getAbsents({
       employeeId: selectedEmployee?.id,
-      startDate: values.startDate && format(values.startDate, "yyyy-MM-dd"),
-      endDate: values.endDate && format(values.endDate, "yyyy-MM-dd"),
+      startDate: values.startDate && formatDate(values.startDate),
+      endDate: values.endDate && formatDate(values.endDate),
     } as AbsentFilter);
   }
 
@@ -123,7 +127,7 @@ export default function AbsentEvidenceTab() {
                           )}
                         >
                           {field.value ? (
-                            format(field.value, "PPP")
+                            formatDateMKD(field.value)
                           ) : (
                             <span>Избери датум од</span>
                           )}
@@ -162,7 +166,7 @@ export default function AbsentEvidenceTab() {
                             )}
                           >
                             {field.value ? (
-                              format(field.value, "PPP")
+                              formatDateMKD(field.value)
                             ) : (
                               <span>Избери датум до</span>
                             )}
@@ -217,7 +221,7 @@ export default function AbsentEvidenceTab() {
               <TableBody>
                 {absents.map((abs) => (
                   <TableRow key={abs.id}>
-                    <TableCell>{abs.date}</TableCell>
+                    <TableCell>{formatDateMKD(abs.date)}</TableCell>
                     <TableCell>
                       {minutesToHoursExtended(abs.timeFrom)}
                     </TableCell>

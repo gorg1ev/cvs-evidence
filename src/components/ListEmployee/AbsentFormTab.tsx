@@ -1,7 +1,7 @@
 import { Calendar } from "../ui/calendar";
 import { Button } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn } from "@/lib/utils";
+import { cn, formatDate, formatDateMKD } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { TimePickerInput } from "../ui/time-picker-input";
@@ -51,7 +51,7 @@ export default function AbsentFormTab() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     if (selectedEmployee === null || selectedEmployee?.id === null) return;
 
-    const date = format(values.date, "yyyy-MM-dd");
+    const date = formatDate(values.date);
     const hourFrom = Number(format(values.hourFrom, "HH"));
     const minFrom = Number(format(values.minFrom, "mm"));
     const hourTo = Number(format(values.hourTo, "HH"));
@@ -95,7 +95,7 @@ export default function AbsentFormTab() {
                         )}
                       >
                         {field.value ? (
-                          format(field.value, "PPP")
+                          formatDateMKD(field.value)
                         ) : (
                           <span>Избери датум</span>
                         )}
