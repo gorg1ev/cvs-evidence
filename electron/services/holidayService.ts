@@ -29,6 +29,8 @@ export function countOverlappingHolidays(
 
   return holidays.filter((holiday) => {
     const date = parseISO(holiday.date.toString());
+    const day = new Date(date).getDay();
+    if (day === 0 || day === 6) return false;
     return isWithinInterval(date, { start: startDate, end: endDate });
   }).length;
 }
