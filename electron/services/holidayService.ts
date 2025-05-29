@@ -1,10 +1,14 @@
 import { isWithinInterval, parseISO } from "date-fns";
-import { APP_ROOT } from "../utils";
+import { APP_ROOT, VITE_DEV_SERVER_URL } from "../utils";
 import fs from "node:fs";
 import path from "node:path";
 
 export function getHolidaysService(): Holidays[] {
-  const holidaysPath = path.join(APP_ROOT, "data/holidays.json");
+  let holidaysPath = path.join(APP_ROOT, "data/holidays.json");
+
+  if (!VITE_DEV_SERVER_URL) {
+    holidaysPath = path.join(process.resourcesPath, "data/holidays.json");
+  }
 
   if (!fs.existsSync(holidaysPath)) {
     return [];
